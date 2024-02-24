@@ -7,7 +7,9 @@ const countries = [
       name: "Germany",
       population: "81,770,900",
       region: "Europe",
-      capital: "Berlin"
+      capital: "Berlin",
+      isLike: true,
+      isBasket: true
     },
     {
       id: 2,
@@ -15,7 +17,9 @@ const countries = [
       name: "Spain",
       population: "47,370,000",
       region: "Europe",
-      capital: "Madrid"
+      capital: "Madrid",
+      isLike: true,
+      isBasket: true
     },
     {
       id: 3,
@@ -23,7 +27,9 @@ const countries = [
       name: "Brazil",
       population: "206,135,893",
       region: "Americas",
-      capital: "Brasília"
+      capital: "Brasília",
+      isLike: true,
+      isBasket: true
     },
     {
       id: 4,
@@ -31,7 +37,9 @@ const countries = [
       name: "Iceland",
       population: "334,300",
       region: "Europe",
-      capital: "Reykjavík"
+      capital: "Reykjavík",
+      isLike: false,
+      isBasket: false
     },
     {
       id: 5,
@@ -39,7 +47,9 @@ const countries = [
       name: "Afghanistan",
       population: "27,657,145",
       region: "Asia",
-      capital: "Kabul"
+      capital: "Kabul",
+      isLike: false,
+      isBasket: false
     },
     {
       id: 6,
@@ -47,7 +57,9 @@ const countries = [
       name: "Uzbekistan",
       population: "35,482,369",
       region: "Asia",
-      capital: "Tashkent"
+      capital: "Tashkent",
+      isLike: true,
+      isBasket: true
     },
     {
       id: 7,
@@ -55,7 +67,9 @@ const countries = [
       name: "Albania",
       population: "2,886,026",
       region: "Europe",
-      capital: "Tirana"
+      capital: "Tirana",
+      isLike: false,
+      isBasket: false
     },
     {
       id: 8,
@@ -63,7 +77,9 @@ const countries = [
       name: "Algeria",
       population: "40,400,000",
       region: "Africa",
-      capital: "Algiers"
+      capital: "Algiers",
+      isLike: false,
+      isBasket: false
     },
   ]
   
@@ -74,62 +90,143 @@ const countries = [
    elBody.classList.toggle("mode")
   })
 
-  let elhero = document.querySelector(".hero")
-  let elDiv = document.createElement("div")
-  elhero.append(elDiv)
-  elDiv.classList.add("hero__wrapper")
+  const elHero = document.querySelector(".hero")
+  const elSelect = document.querySelector(".hero__select")
+  let elModalwrap = document.querySelector(".modal-wrap")
+  let elModalCard = document.querySelector(".modal-card")
 
-  function findCountry(arr) {
-    arr.map(item => {
+  const elList = document.createElement("ul")
+  elHero.appendChild(elList)
+  elList.classList.add("hero__list")
 
-      let elDIvcard = document.createElement("div")
-      elDiv.append(elDIvcard)
-      elDIvcard.classList.add("hero___wrapper-card")
 
-      let elImg = document.createElement("img")
-      elDIvcard.appendChild(elImg)
-      elImg.classList.add("country-img")
-      elImg.src = item.img
+
+// --------------find country function and inner hmtml tag writing -------------------
+
+  function findCountry(array) {
+    elList.innerHTML = ""
+    const sortARR = array.sort((a, b) => a.name < b.name ? -1 : 1)
+    sortARR.map(item =>{
+      let elItem = document.createElement("li")
+      elItem.classList.add("hero__item")
+      elItem.innerHTML = `
+      <img class="country__img" src=${item.img} alt="Countries flag img" width="250px" height="200px"><br>
+      <b class="hero__btag">${item.id}</b>
+      <h2 class="hero__item-title"> ${item.name}</h2>
+      <p class="hero__item-text">Population: ${item.population}</p>
+      <p class="hero__item-text">Region: ${item.region}</p>
+      <p class="hero__item-text">Capital: ${item.capital}</p>
       
-      let elTitle = document.createElement("h3")
-      elDIvcard.appendChild(elTitle)
-      elTitle.classList.add("hero__title")
-      elTitle.textContent = item.name
+      <div class="hero__item-wrap">
+      <button class="hero__like id="${item.id}">
+        <svg class="${item.isLike ? "like" : "dislike"}"" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+        </svg>
+      </button>
+      <button class="basket" id="${item.id}">
+        <svg class="${item.isBasket ? "buy" : "noBuy"}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+        </svg>
+      </button>
+      <button onclick="moreBtnClick(${item.id})" id="${item.id}" class="more">More</button>
+      </div>
+      `
+    elList.appendChild(elItem)
 
-      let elDivinner = document.createElement("div")
-      elDIvcard.appendChild(elDivinner)
-      elDivinner.classList.add("hero__demo")
-     
-      
-      let elText1 = document.createElement("p")
-      elDivinner.appendChild(elText1)
-      elText1.classList.add("hero__text1")
-      elText1.textContent = "Population: "
-
-      let elSpan1 = document.createElement("span")
-      elText1.appendChild(elSpan1)
-      elSpan1.classList.add("hero__line")
-      elSpan1.textContent = item.population
-
-      let elText2 = document.createElement("p")
-      elDivinner.appendChild(elText2)
-      elText2.classList.add("hero__text1")
-      elText2.textContent = "Region: "
-
-      let elSpan2 = document.createElement("span")
-      elText2.appendChild(elSpan2)
-      elSpan2.classList.add("hero__line")
-      elSpan2.textContent = item.region
-
-      let elText3 = document.createElement("p")
-      elDivinner.appendChild(elText3)
-      elText3.classList.add("hero__text1")
-      elText3.textContent = "Capital: "
-
-      let elSpan3 = document.createElement("span")
-      elText3.appendChild(elSpan3)
-      elSpan3.classList.add("hero__line")
-      elSpan3.textContent = item.capital
     })
   }
+
+
+// --------------find country function and inner hmtml tag writing end-------------------
+
+ 
+  // ---------------modal start-----------
+
+
+  function moreBtnClick(event) {
+    elModalwrap.classList.add("modal-open")
+    const data = countries.find(item => item.id == event)
+    elModalCard.innerHTML = `
+      <div class="modal-img">
+       <img class="country__img modal__img" src=${data.img} alt="Countries flag img" width="400" height="200">
+      </div>
+
+      <div class="modal-demo">
+       <h2 class="hero__item-title"> ${data.name}</h2>
+       <p class="hero__item-text">Population: <span class="hero__item-line">${data.population}</span></p>
+       <p class="hero__item-text">Region: <span class="hero__item-line">${data.region}</span></p>
+       <p class="hero__item-text">Capital: <span class="hero__item-line">${data.capital}</span></p>
+      </div>
+
+      `
+  }
+
+  elModalwrap.addEventListener("click", function(evt){
+    if(evt.target.id == "modal-wrap"){
+      elModalwrap.classList.remove("modal-open")
+    }
+  })
+
+// ---------------modal end-----------------
+
+
+// --------------------select option created ------------------
+
+
+  function selectCountry(arr, selectTag) {
+    arr.filter(item =>{
+   let elOption = document.createElement("option")
+   elOption.textContent = item.name;
+   elOption.setAttribute("value", item.id)
+   selectTag.appendChild(elOption)
+    })
+  }
+  selectCountry(countries, elSelect)
+  
+  // --------------------select option created end------------------
+  
+  
   findCountry(countries)
+  
+
+
+
+  // -----------select change------------------
+
+
+  elSelect.addEventListener("change", function(evt){
+  const changeId =evt.target.value;
+  if(changeId == 0){
+    findCountry(countries)
+  }
+  else{
+    const filterId = countries.filter(item => item.id == changeId)
+    findCountry(filterId)
+  }
+  })
+
+
+  // -----------select change end -------------------
+
+
+  // -------------------like---------------
+
+  let elcountryLike = document.querySelector(".like-count")
+
+  function findCountryLike(arr){
+    const data = arr.filter(item => item.isLike == true)
+    elcountryLike.textContent = data.length
+  }
+  findCountryLike(countries)
+
+
+  // -------------------basket---------------
+
+  let elcountryBasket = document.querySelector(".basket-count")
+
+  function findCountryBasket(arr){
+    const result = arr.filter(item => item.isBasket == true)
+    elcountryBasket.textContent = result.length
+  }
+  findCountryBasket(countries)
+
