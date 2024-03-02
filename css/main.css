@@ -84,6 +84,8 @@ body{
     padding: 20px 0;
     background-color: var(--bg-header);
     box-shadow: 10px 4px 20px 5px var(--color-shadow);
+    position: sticky;
+    top: 0;
 }
 .header{
     display: flex;
@@ -130,7 +132,7 @@ body{
     line-height: 24px;
     font-style: normal;
 }
-.twobtn{
+.twobtn, .twobtn-inner{
     width: 35px;
     height: 35px;
     display: flex;
@@ -142,7 +144,22 @@ body{
     border-radius: 50%;
     box-shadow: 0 4px 20px 5px var(--color-shadow);
 }
-
+.added{
+    width: 70px;
+    padding: 10px;
+    border: none;
+    background-color: rgb(27, 204, 41);
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--color-text);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+}
+.added:hover{
+    box-shadow: 0 4px 20px 5px var(--color-shadow);
+    color: white;
+}
 
 .hero-section {
     padding: 50px 0 45px;
@@ -155,7 +172,7 @@ body{
 }
 .hero__wrap {
     width: 300px;
-    padding: 5px ;
+    padding: 5px 5px 5px 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -211,7 +228,7 @@ body{
 }
 .hero__item{
     margin-top: 75px;
-    padding: 0 0 46px;
+    padding: 0 0 25px;
     border-radius: 5px;
     box-shadow: 0 2px 10px 3px var(--color-shadow);
 }
@@ -252,22 +269,20 @@ body{
     letter-spacing: 0px;
 }
 .hero__item-wrap{
-    margin-top: 12px;
-    margin-left: 24px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 .hero__like, .basket{
-    padding: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border-radius: 3px;
+    border: none;
+    background-color: transparent;
 }
 .more{
-    padding: 10px;
+    padding: 7px;
     border: none;
     border-radius: 5px;
     background-color: #4e70de;
@@ -279,7 +294,7 @@ body{
     cursor: pointer;
 }
 
-/* ---------------modal-------------- */
+/* ---------------modal---------------------------- */
 
 
 .modal-wrap {
@@ -298,7 +313,7 @@ body{
     bottom: 0;
     left: 0;
     width: 50%;
-    height: 35%;
+    height: 50%;
     background-color: gray;
     padding: 30px;
     border-radius: 10px;
@@ -321,29 +336,51 @@ body{
     border-radius: 5px;
 }
 
+.demo__modal {
+    backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+.demo-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 35%;
+    background-color: gray;
+    padding: 30px;
+    border-radius: 10px;
+    margin: auto;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.open-modal{
+    display: block;
+}
 /* -----------like------------- */
 
-.like{
-  color: var(--color-like);
-}
-.dislike{
-    color: var(--color-dislike);
-}
 .like-count{
     color: var(--color-text);
 }
-
+.like{
+    fill: var(--color-like);
+}
 /* ------------------basket------------ */
-
-.buy{
-  color: var(--color-buy);
-}
-.noBuy{
-  color: var(--color-nobuy);
-}
 .basket-count{
     color: var(--color-text);
 }
+.buy{
+    fill: var(--color-buy);
+}
+
 
 .exit-btn{
     width: 20px;
@@ -355,5 +392,123 @@ body{
     right: 10px;
     bottom: 0;
     left: end;
+    cursor: pointer;
+}
+
+.hero__item-card{
+    margin: 15px 15px 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hero__item-box{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#pencil{
+    color: var(--color-icon);
+}
+#trash{
+    color: var(--color-icon);
+}
+.pencil, .trash{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+/* ------------ADD STYLE START------------ */
+
+.form {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 600;
+}
+.form-input {
+    width: 400px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+}
+.form-btn {
+    width: 400px;
+    padding: 10px;
+    border: none;
+    background-color: #4e70de;
+    border-radius: 7px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    cursor: pointer;
+}
+.update-form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.delete__card {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.delete__bold {
+    color: var(--color-text);
+    font-size: 32px;
+    line-height: 44px;
+    font-weight: 600;
+    text-align: center;
+}
+.delete__card-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.delete__cancel {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.delete__inner {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    border-radius: 7px;
     cursor: pointer;
 }
